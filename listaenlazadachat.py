@@ -14,14 +14,16 @@ class Nodo:
 
 
 class ListaEnlazada:
+    __cabeza:Nodo
+    __cant:int
     def __init__(self):
         self.__cabeza = None
         self.__cant = 0
 
     def vacia(self):
-        return self.__cabeza is None
+        return self.__cant==0
 
-    def insertar(self, pos, elem):
+    def insertarporposicion(self, pos, elem):
         if pos < 0 or pos > self.__cant:
             raise Exception("Posición inválida")
         nuevo = Nodo(elem)
@@ -35,6 +37,29 @@ class ListaEnlazada:
             nuevo.setsig(anterior.getsig())
             anterior.setsig(nuevo)
         self.__cant += 1
+        
+    def insertarPorContenido(self, elem):
+        nuevo = Nodo(elem)
+    
+        # caso 1: lista vacía o insertar al inicio
+        if self.vacia() or self.__cabeza.getElem() >= elem:
+            nuevo.setsig(self.__cabeza)
+            self.__cabeza = nuevo
+        else:
+            anterior = self.__cabeza
+            actual = self.__cabeza.getsig()
+    
+            # avanzar mientras el valor actual sea menor al que quiero insertar
+            while actual is not None and actual.getElem() < elem:
+                anterior = actual
+                actual = actual.getsig()
+    
+            # insertar entre anterior y actual
+            nuevo.setsig(actual)
+            anterior.setsig(nuevo)
+    
+        self.__cant += 1
+         
 
     def suprimir(self, pos):
         if self.vacia():
