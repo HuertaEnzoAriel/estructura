@@ -37,28 +37,21 @@ class ListaEnlazada:
             nuevo.setsig(anterior.getsig())
             anterior.setsig(nuevo)
         self.__cant += 1
-        
-    def insertarPorContenido(self, elem):
-        nuevo = Nodo(elem)
-    
-        # caso 1: lista vacía o insertar al inicio
+
+    def insertarporcontenido(self,elem):
+        nuevo=Nodo(elem)
         if self.vacia() or self.__cabeza.getElem() >= elem:
             nuevo.setsig(self.__cabeza)
-            self.__cabeza = nuevo
+            self.__cabeza=nuevo
         else:
-            anterior = self.__cabeza
-            actual = self.__cabeza.getsig()
-    
-            # avanzar mientras el valor actual sea menor al que quiero insertar
+            anterior=self.__cabeza
+            actual=anterior.getsig()
             while actual is not None and actual.getElem() < elem:
-                anterior = actual
-                actual = actual.getsig()
-    
-            # insertar entre anterior y actual
+                anterior=actual
+                actual=actual.getsig()
             nuevo.setsig(actual)
             anterior.setsig(nuevo)
-    
-        self.__cant += 1
+        self.__cant+=1
          
 
     def suprimir(self, pos):
@@ -93,3 +86,12 @@ class ListaEnlazada:
             elementos.append(aux.getElem())
             aux = aux.getsig()
         return elementos
+if __name__ == "__main__":
+    lista = ListaEnlazada()
+    lista.insertarporcontenido(50)
+    lista.insertarporcontenido(20)
+    lista.insertarporcontenido(40)
+    lista.insertarporcontenido(10)
+    lista.insertarporcontenido(30)
+    print(lista.recorrer())  # 👉 [10, 20, 30, 40, 50]
+
