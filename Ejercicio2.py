@@ -22,15 +22,6 @@
             print(f"El nodo {clave} es la raíz, no tiene padre ni hermano.")
             return
 
-        print(f"Padre del nodo {clave}: {padre.get_clave()}")
-
-        # Buscar el hermano
-        if padre.get_izq() and padre.get_izq() != actual:
-            print(f"Hermano del nodo {clave}: {padre.get_izq().get_clave()}")
-        elif padre.get_der() and padre.get_der() != actual:
-            print(f"Hermano del nodo {clave}: {padre.get_der().get_clave()}")
-        else:
-            print(f"El nodo {clave} no tiene hermano.")
 
     # ============================================================
     # b) Mostrar la cantidad de nodos (recursivo)
@@ -78,3 +69,32 @@
             print(f"Sucesor derecho de {clave}: {nodo.get_der().get_clave()}")
         else:
             print(f"El nodo {clave} no tiene sucesor derecho.")
+
+
+if __name__ == "__main__":
+    arbol = ArbolBinarioBusqueda()
+    for x in [70, 47, 92, 35, 68, 79, 83, 100]:
+        arbol.insertar(x)
+
+    print("\n(a) Padre y hermano:")
+    arbol.mostrar_padre_y_hermano(68)
+
+    print("\n(b) Cantidad de nodos:")
+    print("Total de nodos:", arbol.contar_nodos())
+
+    print("\n(c) Altura del árbol:")
+    print("Altura:", arbol.altura())
+
+    print("\n(d) Sucesores del nodo:")
+    arbol.mostrar_sucesores(92)
+
+
+        print(f"Padre del nodo {clave}: {padre.get_clave()}")
+
+        # Buscar el hermano
+        if padre.get_izq() and padre.get_izq() != actual:
+            print(f"Hermano del nodo {clave}: {padre.get_izq().get_clave()}")
+        elif padre.get_der() and padre.get_der() != actual:
+            print(f"Hermano del nodo {clave}: {padre.get_der().get_clave()}")
+        else:
+            print(f"El nodo {clave} no tiene hermano.")
